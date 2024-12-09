@@ -1,5 +1,5 @@
 # 📛 Todo App Backend
-[![Build and Test Checks - CI](https://github.com/godcandidate/todo_backend/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/godcandidate/todo_backend/actions/workflows/ci-cd.yml)
+![Build Status](https://circleci.com/gh/godcandidate/todo_backend.svg?style=shield)
 
 🔗 [API Documentation](#) (Add a working link if available)
 
