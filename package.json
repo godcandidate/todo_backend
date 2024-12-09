@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn server.ts",
     "lint": "eslint *.ts",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "author": "Edward Obeng Dankwah",
   "license": "ISC",
