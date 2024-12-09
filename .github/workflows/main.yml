@@ -1,0 +1,65 @@
+name: Todo CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - dev  # Run on every push to the 'dev' branch
+  pull_request:
+    branches:
+      - main  # Run on PRs targeting the 'main' branch
+
+jobs:
+  linting:
+    name: Lint Code
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      # Step 3: Run linter
+      - name: Run Linter
+        run: npm run lint
+
+  testing:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: linting  # Runs after linting job succeeds
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      - name: Run Tests
+        run: npm test
+
+  deploy:
+    name: Deploy Application
+    runs-on: ubuntu-latest
+    needs: testing  # Runs after testing job succeeds
+
+    steps:
+      # Placeholder step for deployment
+      - name: Deploy Placeholder
+        run: echo "Deployment step will be implemented here"
