@@ -20,7 +20,6 @@ app.use(cors({
   origin: process.env.ORIGIN
 }));
 
-
 // connect server to localhost
 app.listen(process.env.PORT, () => {
     console.log(`Server is connected http://localhost:${process.env.PORT}`);
