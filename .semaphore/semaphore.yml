@@ -1,6 +1,9 @@
 version: v1.0
-
-# Define pipelines
+name: ''
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
 pipelines:
   - name: Build and Test
     agent:
@@ -17,7 +20,6 @@ pipelines:
                 - setup-node
                 - run: npm install
                 - run: npm run lint
-
       - name: Install Dependencies and Run Tests
         task:
           jobs:
@@ -27,7 +29,6 @@ pipelines:
                 - setup-node
                 - run: npm install
                 - run: npm test
-
       - name: Deployment
         task:
           jobs:
@@ -36,8 +37,6 @@ pipelines:
                 - checkout
                 - setup-node
                 - run: echo "Deployment step will be implemented here"
-
-# Define reusable blocks
 blocks:
   - name: setup-node
     task:
