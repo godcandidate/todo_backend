@@ -1,48 +1,41 @@
 version: v1.0
 
-# Define pipelines
-pipelines:
-  - name: Build and Test
-    agent:
-      machine:
-        type: e1-standard-2
-        os_image: ubuntu2204
-    blocks:
-      - name: Install Dependencies and Run Linter
-        task:
-          jobs:
-            - name: Linting
-              commands:
-                - checkout
-                - setup-node
-                - run: npm install
-                - run: npm run lint
-
-      - name: Install Dependencies and Run Tests
-        task:
-          jobs:
-            - name: Testing
-              commands:
-                - checkout
-                - setup-node
-                - run: npm install
-                - run: npm test
-
-      - name: Deployment
-        task:
-          jobs:
-            - name: Deploy Application
-              commands:
-                - checkout
-                - setup-node
-                - run: echo "Deployment step will be implemented here"
-
-# Define reusable blocks
+# Define jobs
 blocks:
-  - name: setup-node
+  - name: Linting
     task:
-      jobs:
-        - name: Setup Node.js Environment
-          commands:
-            - nvm install 22.11.0
-            - nvm use 22.11.0
+      prologue:
+        commands:
+          - checkout
+          - setup-node
+      commands:
+        - npm install
+        - npm run lint
+
+  - name: Testing
+    task:
+      prologue:
+        commands:
+          - checkout
+          - setup-node
+      commands:
+        - npm install
+        - npm test
+
+  - name: Deployment
+    task:
+      prologue:
+        commands:
+          - checkout
+          - setup-node
+      commands:
+        - echo "Deployment step will be implemented here"
+
+# Define a workflow
+promotions:
+  - name: Build and Test
+    pipeline:
+      blocks:
+        - name: Linting
+        - name: Testing
+        - name: Deployment
