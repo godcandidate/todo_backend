@@ -18,7 +18,7 @@ blocks:
             - npm install
             - cache store node-modules-cache node_modules
 
-  - name: Run Linter
+  - name: Linter and Tester
     task:
       jobs:
         - name: Run Linter
@@ -28,8 +28,6 @@ blocks:
             - cache restore node-modules-cache
             - npm run lint
 
-  - name: Run Tests
-    task:
       jobs:
         - name: Run Tests
           commands:
