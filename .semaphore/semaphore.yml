@@ -19,6 +19,8 @@ blocks:
             - cache store node-modules-cache node_modules
 
         - name: Run Linter
+          requires:
+            - Build Environment
           commands:
             - checkout
             - sem-version node 22.11.0  # Set the Node.js version
@@ -26,6 +28,8 @@ blocks:
             - npm run lint
 
         - name: Run Tests
+          requires:
+            - Build Environment
           commands:
             - checkout
             - sem-version node 22.11.0  # Set the Node.js version
