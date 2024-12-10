@@ -21,16 +21,12 @@ blocks:
             - save cache "node_modules"
         
         - name: Run Linter
-          dependencies:  # Use the workspace prepared by Build Environment
-            - Build Environment
           commands:
             - checkout
             - sem-version node 22.11.0
             - npm run lint
 
         - name: Run Tests
-          dependencies:  # Use the workspace prepared by Build Environment
-            - Build Environment
           commands:
             - checkout
             - sem-version node 22.11.0
