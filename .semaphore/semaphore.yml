@@ -1,41 +1,41 @@
 version: v1.0
+name: CI Pipeline for MyApp
 
-# Agent definition
 agent:
   machine:
-    type: e1-standard-2
+    type: f1-standard-2
     os_image: ubuntu2204
 
-# Linting block
 blocks:
-  - name: Linting
+  - name: Lint
     task:
       jobs:
-        - name: Install Dependencies and Run Linter
+        - name: Run Linter
           commands:
             - checkout
-            - nvm install 22.11.0
-            - nvm use 22.11.0
+            - sem-version node 22.11.0  # Set the Node.js version
+            - cache restore
             - npm install
+            - cache store
             - npm run lint
 
-# Testing block
-  - name: Testing
+  - name: Test
     task:
       jobs:
-        - name: Install Dependencies and Run Tests
+        - name: Run Tests
           commands:
             - checkout
-            - nvm install 22.11.0
-            - nvm use 22.11.0
+            - sem-version node 22.11.0  # Set the Node.js version
+            - cache restore
             - npm install
-            - npm test
+            - cache store
+            - npm run test
 
-# Deployment block
-  - name: Deployment
+  - name: Deploy
     task:
       jobs:
         - name: Deploy Application
           commands:
             - checkout
+            - sem-version node 22.11.0  # Set the Node.js version
             - echo "Deployment step will be implemented here"
