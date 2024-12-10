@@ -28,7 +28,6 @@ blocks:
             - cache restore node-modules-cache
             - npm run lint
 
-      jobs:
         - name: Run Tests
           commands:
             - checkout
