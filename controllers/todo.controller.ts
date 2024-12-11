@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import todoModel from "../models/todo.model";
 
 import "dotenv/config";
 import { CatchAsyncError } from "../middlewares/catchAsyncError";
+import ErrorHandler from "../utils/ErrorHandler";
 
 //Add todo interface
 interface IAddTodoBody {
@@ -14,7 +15,7 @@ interface IAddTodoBody {
 }
 
 export const createTodo = CatchAsyncError(
-  async (req: Request, res: Response) => {
+  async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { title, description, priority, category, date } = req.body;
 
@@ -26,13 +27,32 @@ export const createTodo = CatchAsyncError(
       date,
     };
 
-    await todoModel.create(todo);  // Assuming you have the correct model and create method
+    //save todo in database
+    await todoModel.create(todo);  
 
     return res.status(200).send({
       msg: 'Todo added successfully',
     });
-  } catch (error) {
-    console.log(error);
-    return res.status(500).send({ error: 'Error, todo not created' });
+    
+  } catch (error: any) {
+    return next(new ErrorHandler(error.message, 400));
+  }
+});
+
+//Retrieve all todos
+export const getAllTodos = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+  try {
+
+    //Get all todos from database
+    const todos = await todoModel.find();
+
+    res.status(200).json({
+      success: true,
+      todos
+    });
+
+  } catch (error: any) {
+    return next(new ErrorHandler(error.message, 400));
   }
 });
