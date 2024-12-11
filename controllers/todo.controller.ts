@@ -33,7 +33,7 @@ export const createTodo = CatchAsyncError(
     return res.status(200).send({
       msg: 'Todo added successfully',
     });
-    
+
   } catch (error: any) {
     return next(new ErrorHandler(error.message, 400));
   }
@@ -50,6 +50,27 @@ export const getAllTodos = CatchAsyncError(
     res.status(200).json({
       success: true,
       todos
+    });
+
+  } catch (error: any) {
+    return next(new ErrorHandler(error.message, 400));
+  }
+});
+
+
+//Get a todo
+export const getTodo = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+  try {
+
+     //Get a todo from database
+    const post_id = req.params.id;
+    const todo = await todoModel.findById(post_id);
+   
+
+    res.status(200).json({
+      success: true,
+      todo
     });
 
   } catch (error: any) {
