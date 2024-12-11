@@ -17,6 +17,13 @@ blocks:
             - cache restore node-modules-cache
             - npm install
             - cache store node-modules-cache node_modules
+        - name: Validate all commits in the latest push
+          run: |
+                # Fetch the latest push commits
+                commits=$(git rev-list origin/main..HEAD)
+                for commit in $commits; do
+                  git show --quiet $commit --format='%B' | npx commitlint --verbose || exit 1
+                done
 
   - name: Linter and Tester
     task:
