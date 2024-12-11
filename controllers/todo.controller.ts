@@ -77,3 +77,27 @@ export const getTodo = CatchAsyncError(
     return next(new ErrorHandler(error.message, 400));
   }
 });
+
+
+// edit course
+export const editTodo = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const todoData = req.body;
+      
+      const todoId = req.params.id;
+
+      await todoModel.findByIdAndUpdate(
+        todoId,
+        { $set: todoData },
+        { new: true }
+      );
+
+      res.status(201).json({
+        success: "Todo successfully updated",
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 400));
+    }
+  }
+);
