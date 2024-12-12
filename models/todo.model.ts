@@ -7,7 +7,7 @@ export interface ITodo extends Document {
   priority: string;
   category: string;
   date: Date;
-  status: String;
+  active: Boolean;
 }
 
 // Todo Schema
@@ -35,10 +35,9 @@ const todoSchema: Schema<ITodo> = new mongoose.Schema(
       type: Date,
       required: [true, "Date is required"],
     },
-    status: {
-      type: String,
-      default: "active",
-      enum: ["active", "completed"]
+    active: {
+      type: Boolean,
+      default: true,
     }
   },
   { timestamps: true }
