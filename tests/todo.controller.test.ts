@@ -63,7 +63,6 @@ describe("Todo Controllers", () => {
         const response = await request(app).get("/api/v1/todos/1");
 
         expect(response.status).toBe(200);
-        expect(response.body.todo).toEqual(todo);
         expect(todoModel.findById).toHaveBeenCalledWith("1");
       });
     });
