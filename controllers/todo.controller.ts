@@ -94,7 +94,7 @@ export const editTodo = CatchAsyncError(
       );
 
       res.status(201).json({
-        success: "Todo successfully updated",
+        msg: "Todo successfully updated",
       });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
@@ -118,7 +118,7 @@ export const deleteTodo = CatchAsyncError(
       await todoModel.findByIdAndDelete(todoId);
 
       res.status(200).json({
-        success: "Todo successfully deleted",
+        msg: "Todo successfully deleted",
       });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
