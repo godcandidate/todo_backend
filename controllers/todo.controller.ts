@@ -58,7 +58,7 @@ export const getAllTodos = CatchAsyncError(
 });
 
 
-//Get a todo
+//Get a todo details given the id
 export const getTodo = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -79,7 +79,7 @@ export const getTodo = CatchAsyncError(
 });
 
 
-// edit course
+// update a todo details given the id
 export const editTodo = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -95,6 +95,30 @@ export const editTodo = CatchAsyncError(
 
       res.status(201).json({
         success: "Todo successfully updated",
+      });
+    } catch (error: any) {
+      return next(new ErrorHandler(error.message, 400));
+    }
+  }
+);
+
+// Delete a todo given its ID
+export const deleteTodo = CatchAsyncError(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const todoId = req.params.id;
+
+      // Check if the todo exists
+      const todo = await todoModel.findById(todoId);
+      if (!todo) {
+        return next(new ErrorHandler("Todo not found", 404));
+      }
+
+      // Delete the todo
+      await todoModel.findByIdAndDelete(todoId);
+
+      res.status(200).json({
+        success: "Todo successfully deleted",
       });
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
