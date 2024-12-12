@@ -30,9 +30,7 @@ export const createTodo = CatchAsyncError(
     //save todo in database
     await todoModel.create(todo);  
 
-    return res.status(200).send({
-      msg: 'Todo added successfully',
-    });
+    return res.status(200).send(todo);
 
   } catch (error: any) {
     return next(new ErrorHandler(error.message, 400));
