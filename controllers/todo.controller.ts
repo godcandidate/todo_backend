@@ -47,10 +47,7 @@ export const getAllTodos = CatchAsyncError(
     //Get all todos from database
     const todos = await todoModel.find();
 
-    res.status(200).json({
-      success: true,
-      todos
-    });
+    res.status(200).json(todos);
 
   } catch (error: any) {
     return next(new ErrorHandler(error.message, 400));
@@ -68,10 +65,7 @@ export const getTodo = CatchAsyncError(
     const todo = await todoModel.findById(post_id);
    
 
-    res.status(200).json({
-      success: true,
-      todo
-    });
+    res.status(200).json(todo);
 
   } catch (error: any) {
     return next(new ErrorHandler(error.message, 400));
@@ -87,15 +81,13 @@ export const editTodo = CatchAsyncError(
       
       const todoId = req.params.id;
 
-      await todoModel.findByIdAndUpdate(
+      const todo = await todoModel.findByIdAndUpdate(
         todoId,
         { $set: todoData },
         { new: true }
       );
 
-      res.status(201).json({
-        msg: "Todo successfully updated",
-      });
+      res.status(200).json(todo);
     } catch (error: any) {
       return next(new ErrorHandler(error.message, 400));
     }
@@ -107,12 +99,6 @@ export const deleteTodo = CatchAsyncError(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const todoId = req.params.id;
-
-      // Check if the todo exists
-      const todo = await todoModel.findById(todoId);
-      if (!todo) {
-        return next(new ErrorHandler("Todo not found", 404));
-      }
 
       // Delete the todo
       await todoModel.findByIdAndDelete(todoId);
