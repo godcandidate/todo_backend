@@ -19,7 +19,7 @@ export const createTodo = CatchAsyncError(
   try {
     const { title, description, priority, category, date } = req.body;
 
-    const todo: IAddTodoBody = {
+    const savedTodo: IAddTodoBody = {
       title,
       description,
       priority,
@@ -27,8 +27,8 @@ export const createTodo = CatchAsyncError(
       date,
     };
 
-    //save todo in database
-    await todoModel.create(todo);  
+    // Save todo in the database and get the created document
+    const todo = await todoModel.create(savedTodo);
 
     return res.status(200).send(todo);
 
