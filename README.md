@@ -1,5 +1,5 @@
 # 📛 Todo App Backend
-![Build Status](https://circleci.com/gh/godcandidate/todo_backend.svg?style=shield)
+[![Build Status](https://eddie.semaphoreci.com/badges/todo_backend/branches/dev.svg?key=019e048b-5e19-4d3f-a18e-5fac6f1c1b74)](https://eddie.semaphoreci.com/projects/todo_backend)
 
 🔗 [API Documentation](#) (Add a working link if available)
 
