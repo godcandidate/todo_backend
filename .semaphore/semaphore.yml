@@ -45,3 +45,4 @@ blocks:
         - name: Deploy Application
           commands:
             - echo "Deployment step will be implemented here"
+            - echo "DockerHub username: $DOCKERHUB_USERNAME"
