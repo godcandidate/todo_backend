@@ -43,6 +43,8 @@ blocks:
     task:
       jobs:
         - name: Deploy Application
+          when:
+            condition: 'semver_is_valid("v*", env.GIT_TAG)'
           commands:
             - echo "$DOCKERHUB_USERNAME"
       secrets:
