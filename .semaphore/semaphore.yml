@@ -50,4 +50,6 @@ blocks:
     promotion:
       name: Deploy on Tag
       auto_promote_on:
-        - tag: "v*"
+        - tag: v*
+    run:
+      when: tag =~ '.*'
