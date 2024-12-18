@@ -44,7 +44,30 @@ jobs:
           command: |
             cd ~/repo  # Navigate to the project root (adjust if necessary)
             npm test  # Run Jest tests
+    docker_push:
+    docker:
+      - image: cimg/docker:24.0  # Use a Docker image for building and pushing
+    steps:
+      - checkout  # Pull your repository
 
+      # Step 1: Build Docker Image
+      - run:
+          name: Build Docker Image
+          command: |
+            docker build -t your-dockerhub-username/your-image-name:latest .
+
+      # Step 2: Login to Docker Hub
+      - run:
+          name: Login to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+      # Step 3: Push Docker Image
+      - run:
+          name: Push Docker Image
+          command: |
+            docker push your-dockerhub-username/your-image-name:latest
+            
   deploy:
     docker:
       - image: cimg/node:22.11.0  # Use a Node.js Docker image
