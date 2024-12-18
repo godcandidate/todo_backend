@@ -45,3 +45,5 @@ blocks:
         - name: Deploy Application
           commands:
             - echo "$DOCKERHUB_USERNAME"
+      secrets:
+        - name: Docker
