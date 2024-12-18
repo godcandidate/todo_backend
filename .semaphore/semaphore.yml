@@ -45,3 +45,8 @@ blocks:
         - name: Deploy Application
           commands:
             - echo "DockerHub username: $DOCKERHUB_USERNAME"
+      env_vars:
+        - name: DOCKERHUB_USERNAME
+          value: godcandidate
+        - name: DOCKERHUB_PASSWORD
+          value: '#Winter@22'
