@@ -48,13 +48,7 @@ blocks:
             - sem-version node 22.11.0
             - |
               # Fetch the latest tag from the Git repo
-              LATEST_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-              # If no tag exists, start from v1.0
-              if [ -z "$LATEST_TAG" ]; then
-                LATEST_TAG="v1.0"
-              fi
-              # Increment the tag version (e.g., v1.0 -> v1.1)
-              NEW_TAG=$(echo $LATEST_TAG | awk -F. -v OFS=. '{$NF++; print $0}')
+              NEW_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
               echo "Building Docker image with tag $NEW_TAG"
               docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD"
               docker build -t $DOCKERHUB_USERNAME/todo-web-app-backend:$NEW_TAG -t $DOCKERHUB_USERNAME/todo-web-app-backend:latest .
