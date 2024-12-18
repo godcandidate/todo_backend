@@ -44,4 +44,4 @@ blocks:
       jobs:
         - name: Deploy Application
           commands:
-            - echo "DockerHub username: $DOCKERHUB_USERNAME"
+            - echo "$DOCKERHUB_USERNAME"
