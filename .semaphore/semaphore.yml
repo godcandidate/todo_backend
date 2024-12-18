@@ -43,9 +43,10 @@ blocks:
     task:
       jobs:
         - name: Deploy Application
-          when:
-            condition: 'semver_is_valid("v*", env.GIT_TAG)'
           commands:
             - echo "$DOCKERHUB_USERNAME"
       secrets:
         - name: Docker
+    # Add a condition to only execute this block on a tag push
+    conditions:
+        - condition: "not(eq(env.SEMAPHORE_GIT_TAG, ''))"
