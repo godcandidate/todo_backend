@@ -47,6 +47,7 @@ blocks:
             - echo "$DOCKERHUB_USERNAME"
       secrets:
         - name: Docker
-    # Add a condition to only execute this block on a tag push
-    conditions:
-        - condition: "not(eq(env.SEMAPHORE_GIT_TAG, ''))"
+    promotion:
+      name: Deploy on Tag
+      auto_promote_on:
+        - tag: "v*"
