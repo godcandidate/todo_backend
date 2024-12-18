@@ -47,9 +47,5 @@ blocks:
             - echo "$DOCKERHUB_USERNAME"
       secrets:
         - name: Docker
-    promotion:
-      name: Deploy on Tag
-      auto_promote_on:
-        - tag: v*
     run:
       when: tag =~ '.*'
