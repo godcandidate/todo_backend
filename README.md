@@ -1,5 +1,7 @@
 # 📛 Todo App Backend
-[![Build Status](https://eddie.semaphoreci.com/badges/todo_backend/branches/dev.svg?key=019e048b-5e19-4d3f-a18e-5fac6f1c1b74)](https://eddie.semaphoreci.com/projects/todo_backend)
+[![Build Status](https://eddie.semaphoreci.com/badges/todo_backend/branches/master.svg?key=b9a3f02f-3f1c-4940-9ac4-f1944a74c54d)](https://eddie.semaphoreci.com/projects/todo_backend)
+
+[![Docker Hub](https://img.shields.io/badge/Docker_Hub-Click_here-blue)](https://hub.docker.com/r/godcandidate/todo-web-app-backend)
 
 🔗 [API Documentation](#) (Add a working link if available)
 
